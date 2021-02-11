@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/product.dart';
 
 import '../providers/products_provider.dart';
 
@@ -12,16 +11,11 @@ class ProductsOverviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productsData =
-        Provider.of<Products>(context); // subscribe to <Products> changes.
-    final loadedProducts = productsData.items;
     var scaffold = Scaffold(
       appBar: AppBar(
         title: Text('My Shop'),
       ),
-      body: ProductsGrid(
-        loadedProducts: loadedProducts,
-      ),
+      body: ProductsGrid(),
     );
     return scaffold;
   }
@@ -29,15 +23,12 @@ class ProductsOverviewScreen extends StatelessWidget {
 
 // Extracted products grid, which is a configured GridView.
 class ProductsGrid extends StatelessWidget {
-  const ProductsGrid({
-    Key key,
-    @required this.loadedProducts,
-  }) : super(key: key);
-
-  final List<Product> loadedProducts;
 
   @override
   Widget build(BuildContext context) {
+    final productsData =
+        Provider.of<Products>(context); // subscribe to <Products> changes.
+    final loadedProducts = productsData.items;
     return GridView.builder(
       // The builder method provides virtualization for free, so longer lists are optimised.
       padding: const EdgeInsets.all(10.0),
