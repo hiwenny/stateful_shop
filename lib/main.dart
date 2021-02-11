@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import './screens/products_overview_screen.dart';
+import './screens/product_detail_screen.dart';
+
+import './providers/products_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,14 +13,23 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        accentColor: Colors.deepOrange,
-        fontFamily: 'Lato',
+    return ChangeNotifierProvider(
+      // top-level provider. Subscribers underneath can listen.
+      create: (ctx) =>
+          Products(), // receives build context, returns instance of provider.
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          accentColor: Colors.deepOrange,
+          fontFamily: 'Lato',
+        ),
+        home: ProductsOverviewScreen(),
+        routes: {
+          ProductsOverviewScreen.routeName: (ctx) => ProductsOverviewScreen(),
+          ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+        },
       ),
-      home: ProductsOverviewScreen(),
     );
   }
 }
@@ -29,16 +43,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('My Stateful Shop'),
       ),
-      body: Center(
-        child: Text('Body')
-      ),
+      body: Center(child: Text('Body')),
     );
   }
 }
