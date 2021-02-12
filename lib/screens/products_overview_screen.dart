@@ -32,10 +32,11 @@ class ProductsGrid extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       itemCount: loadedProducts.length,
       // 2. Sample nested Provider
-      itemBuilder: (ctx, i) => ChangeNotifierProvider(
+      // 4. Sample Provider with rebuild on value change.
+      itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
         // Now list of products are available in the context, and ProductItem can just access it.
         // Important! <Product> must have ChangeNotifier mixin because this context targets <Product> directly by returning List<Products>[i].
-        create: (c) => loadedProducts[i],
+        value: loadedProducts[i],
         child: ProductItem(
           // Now we can skip passing the product specifics and just pull it out of <Product> provider inside ProductItem instead.
 
