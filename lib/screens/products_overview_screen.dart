@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 import '../providers/products_provider.dart';
 
 import '../widgets/product_item.dart';
@@ -23,7 +22,6 @@ class ProductsOverviewScreen extends StatelessWidget {
 
 // Extracted products grid, which is a configured GridView.
 class ProductsGrid extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final productsData =
@@ -33,10 +31,17 @@ class ProductsGrid extends StatelessWidget {
       // The builder method provides virtualization for free, so longer lists are optimised.
       padding: const EdgeInsets.all(10.0),
       itemCount: loadedProducts.length,
-      itemBuilder: (ctx, i) => ProductItem(
-        // defines the item structure
-        id: loadedProducts[i].id, title: loadedProducts[i].title,
-        imageUrl: loadedProducts[i].imageUrl,
+      // 2. Sample nested Provider
+      itemBuilder: (ctx, i) => ChangeNotifierProvider(
+        // Now list of products are available in the context, and ProductItem can just access it.
+        // Important! <Product> must have ChangeNotifier mixin because this context targets <Product> directly by returning List<Products>[i].
+        create: (c) => loadedProducts[i],
+        child: ProductItem(
+          // Now we can skip passing the product specifics and just pull it out of <Product> provider inside ProductItem instead.
+
+          // id: loadedProducts[i].id, title: loadedProducts[i].title,
+          // imageUrl: loadedProducts[i].imageUrl,
+        ),
       ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         // defines the grid structure

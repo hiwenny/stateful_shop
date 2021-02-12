@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+// 2. Sample nested Provider
 class Product with ChangeNotifier {
   final String id;
   final String title;
@@ -17,4 +18,9 @@ class Product with ChangeNotifier {
     @required this.imageUrl,
     this.isFavourite = false,
   });
+
+  void toggleFavourites() {
+    isFavourite = !isFavourite;
+    notifyListeners(); // setState eq
+  }
 }

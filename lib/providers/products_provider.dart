@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
-import '../models/product.dart';
+import 'package:flutter/foundation.dart';
+import 'product.dart';
 
 // gives access to notifyListeners(), the publish method to push the change event to the listening Widgets.
 // this is a Mixin. class X with M. Looser coupling - usually methods only as utility functionality provider. Multiple mixins possible.
 // as opposed to derived class, class Y extends P. Only one parent.
-class Products { 
+// 1. Sample Provider 
+class Products with ChangeNotifier { 
   List<Product> _items = [
     Product(
       id: 'p1',

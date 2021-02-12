@@ -13,6 +13,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // 1. Sample Provider 
     return ChangeNotifierProvider(
       // top-level provider. Subscribers underneath can listen.
       create: (ctx) =>

@@ -1,16 +1,11 @@
 # stateful_shop
 
-A new Flutter project.
+Sample demo showing various methods to use Providers in Flutter.
+Search for keywords e.g. `2. Sample nested Provider` to see where they're implemented.
+## Examples Directory
+- 1. Sample Provider: \<Products> in `/main.dart` for products list changes
+- 2. Sample nested Provider: \<Product>provider, for product details listener. This is a sample of nested provider.
+- 3. Opt-out listener: to subscribe and get the init state, but ignore subsequent updates.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Warnings
+- Nested providers can cause bugs - because Flutter recycles Widgets and doesn't rebuild on every navigation, nested Providers may have stale data.
