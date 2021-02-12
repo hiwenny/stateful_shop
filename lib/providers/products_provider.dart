@@ -6,6 +6,9 @@ import 'product.dart';
 // as opposed to derived class, class Y extends P. Only one parent.
 // 1. Sample Provider 
 class Products with ChangeNotifier { 
+  // // 6. Example global toggle
+  // var _showFavouritesOnly = false;
+
   List<Product> _items = [
     Product(
       id: 'p1',
@@ -41,8 +44,26 @@ class Products with ChangeNotifier {
     ),
   ];
   List<Product> get items {
+  // // 6. Example global toggle
+  //   if (_showFavouritesOnly) return _items.where((prodItem) => prodItem.isFavourite).toList();
     return [..._items];
   }
+
+  List<Product> get favouriteItems {
+    // 7. Sample toggling in local state with Provider getter methods.
+    return _items.where((prodItem) => prodItem.isFavourite).toList();
+  }
+
+  // // 6. Example global toggle
+  // void showFavouritesOnly() {
+  //   _showFavouritesOnly = true;
+  //   notifyListeners();
+  // }
+
+  // void showAll() {
+  //   _showFavouritesOnly = false;
+  //   notifyListeners();
+  // }
 
   Product findById(String id) {
     return _items.firstWhere((product) => product.id == id);
